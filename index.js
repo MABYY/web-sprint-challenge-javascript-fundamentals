@@ -194,10 +194,9 @@ const Add = (num1,num2) => num1 + num2;
 const Multiply = (num1,num2) => num1*num2;
 const Greeting = (firstname,lastname) => `Hello ${firstname} ${lastname}, nice to meet you!`;
 
-console.log(consume(2, 2, Add)); // 4
-console.log(consume(10, 16, Multiply)); // 160
-console.log(consume("Mary", "Poppins", Greeting)); // Hello Mary Poppins, nice to meet you!
-
+console.log(consume(2, 2, Add)); 
+console.log(consume(10, 16, Multiply)); 
+console.log(consume("Mary", "Poppins", Greeting)); 
 
 // 🐴🐴🐴 Topic 3: Prototypes 🐴🐴🐴 //
 //🐴🐴🐴 Task: You are to build a cuboid maker that can return values for a cuboid's volume or surface area. 
