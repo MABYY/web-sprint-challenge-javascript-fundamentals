@@ -1,6 +1,7 @@
 //🚀🚀🚀  Topic #1 Closures 🚀🚀🚀//
 /* 🚀🚀🚀🤓 Task 1: 🤓🚀🚀🚀 
-Study the code below and explain in your own words why nested function can access the variable internal. */
+Study the code below and explain in your own words why nested function 
+can access the variable internal. */
 
 const external = "I'm outside the function";
 
@@ -17,8 +18,20 @@ myFunction();
 
 //🚀🚀🚀 ⬇️ 📝 Explanation ⬇️ 📝 🚀🚀🚀: 
 
+// When we refer to scope we reference where functions and varianbles are available to the programmer.
+// Anything that is global scope is attacehd to the window function. Let and scope are the exception 
+// because they are block scope.This means that if they are inside a function they can only be accessed 
+// within the curly brackets unless they are returned. Functions work the same way.
 
+// Closure is the ability to access a function from a parent level scope in a child level even after 
+// the parent function has been terminated.  Closure happens when a funcion reaches outside its s
+// cope into the parent function to access a variable.
 
+// The nestedFunction can access the variable internal because two things happen ar the same time. 
+
+// 1- the variable internal is scoped within myFunction. This means that we can access this variable
+//  if we call myFunction.
+// 2- nestedFunction is scoped within myFuncion and therefore can access internal to reach closure.   
 
 
 /* 🚀🚀🚀 Task 2: Counter 🚀🚀🚀 */
@@ -26,16 +39,22 @@ myFunction();
     1. Receive a number 
     2. Use a counter to return the summation of that number. 
     
-For example, `summation(4)` should return 10 because 1+2+3+4 is 10. Note, you may use a for loop for this function if you wish */
+For example, `summation(4)` should return 10 because 1+2+3+4 is 10. 
+Note, you may use a for loop for this function if you wish */
 
-function summation(/*Your Code Here*/) {
-  /*Your Code Here*/
-
-  }
+function summation(num) {
+ const arr = Array.from(Array((num+1)).keys())
+ const singlevalue = arr.reduce(function(accum,item){return accum + item;},0);
+ return singlevalue;
+ };
  
+ 
+console.log("Task 2");
+console.log(summation(4));
 
 // 🦁🦁🦁 Topic 2: ADVANCED Array Methods 🦁🦁🦁
-// Given this zoo data from around the United States, follow the instructions below. Use the specific array methods in the requests below to solve the problems.
+// Given this zoo data from around the United States, follow the instructions below. 
+// Use the specific array methods in the requests below to solve the problems.
 
 const zooAnimals = [
     { animal_name: "Jackal, asiatic", population: 5, scientific_name: "Canis aureus", state: "Kentucky" },
@@ -56,10 +75,21 @@ const zooAnimals = [
   displayNames will be an array of strings, and each string should follow this pattern: "name: {name}, scientific: {scientific name}"
   */
 
-  function animalNames(/*Your Code Here*/){
-    /*Your Code Here*/
+  function animalNames(arr){
+    let displayNames = [];
+
+    function MyFunction(item){
+      displayNames.push({
+        name: item.animal_name,
+        scientific: item.scientific_name
+      })
+    }
+    arr.forEach(MyFunction);
+    return displayNames;
   }
   
+  console.log("Task 2 Advanced ");
+  console.log(animalNames(zooAnimals));
 
   /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
   The zoo needs a list of all their animal's names converted to lower case. 
@@ -67,32 +97,56 @@ const zooAnimals = [
   For example: ['jackal, asiatic', .....]
   */
 
-  function lowerCaseNames(/*Your Code Here*/){
-    /*Your Code Here*/
+  function lowerCaseNames(arr){
+    const array_names = arr.map(function(item){
+    let arraOfarr = item.animal_name.split(' ').map(subItem => subItem.toLowerCase());
+      return arraOfarr;
+      });
+    let arr_list_names = [];
+    array_names.forEach(function(item){
+        item.forEach(function(subItem){
+          arr_list_names.push(subItem);
+        });
+      });
+    return arr_list_names ;
   }
   
-  
+console.log("Task 2 map() ");
+console.log(lowerCaseNames(zooAnimals));
+
+
+
   /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
   The zoo is concerned about animals with a lower population count. 
   Using lowPopulationAnimals use .filter() to create a new array of objects which contains only the animals with a population of less than 5.
   */
 
-  function lowPopulationAnimals(/*Your Code Here*/){
-    /*Your Code Here*/
+  function lowPopulationAnimals(arr){
+  const arr_low_pop = arr.filter(element => element.population<5);
+  return arr_low_pop ;
   }
+  console.log("Task 3");
+  console.log(lowPopulationAnimals(zooAnimals));
   
 
   /* 🦁🦁🦁 Request 4: .reduce() 🦁🦁🦁
   The zoo needs to know their total animal population across the United States. 
   Using USApop find the total population from the zoos array using the .reduce() method. 
-  Remember the reduce method takes two arguments: a callback (which itself takes two args - the accumulator and the item), and an initial value for the count.
+  Remember the reduce method takes two arguments: a callback (which itself takes two args - 
+    the accumulator and the item), and an initial value for the count.
   */
 
-  function USApop(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
   
-  
+  function USApop(arr){
+    const arr_low_pop = arr.map(element => element.population);
+    return arr_low_pop.reduce(function(accumulator, currentValue) {
+      return accumulator + currentValue;}) ;
+    }
+
+  console.log("Task 4");
+  console.log(USApop(zooAnimals));
+
+
   // 🦁🦁🦁 Callbacks 🦁🦁🦁  
   /* 🦁🦁🦁 Step 1: Create a higher-order function 🦁🦁🦁
     * Use the higher-order function consume with 3 parameters: a, b and cb
@@ -101,45 +155,54 @@ const zooAnimals = [
     * The consume function should return the invocation of cb, passing a and b into cb as arguments
   */
 
-  function consume(/*Your Code Here */){
-    /*Your Code Here */
-  }
+function consume(a,b,cb){
+    return cb(a,b);
+  };
  
-  
   /* 🦁🦁🦁 Step 2: Create several functions to callback with consume(); 🦁🦁🦁 */
  // 🦁🦁🦁 Use add to return the sum of two numbers 🦁🦁🦁
   
-function add(/*Your Code Here */){
-    /*Your Code Here*/
+function add(num1,num2){
+  return num1+num2;
   }
 
 // 🦁🦁🦁 Use multiply to return the product of two numbers 🦁🦁🦁
   
-function multiply(/*Your Code Here */){
-   /*Your Code Here */
+function multiply(num1,num2){
+  return num1*num2;
   }
 
  // 🦁🦁🦁 Use greeting to accept a first and last name and return "Hello {first-name} {last-name}, nice to meet you!" 🦁🦁🦁
   
-function greeting(/*Your Code Here */){
-   return /*Your Code Here */
+function greeting(firstname,lastname){
+   return `Hello ${firstname} ${lastname}, nice to meet you!`;
   }
   
+
   // 🦁🦁🦁 Step 3: Check your work by un-commenting the following calls to consume(): 🦁🦁🦁 
   // ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️
-  // console.log(consume(2, 2, add)); // 4
-  // console.log(consume(10, 16, multiply)); // 160
-  // console.log(consume("Mary", "Poppins", greeting)); // Hello Mary Poppins, nice to meet you!
+  console.log(consume(2, 2, add)); // 4
+  console.log(consume(10, 16, multiply)); // 160
+  console.log(consume("Mary", "Poppins", greeting)); // Hello Mary Poppins, nice to meet you!
   
   
 // 🦁💪 Stretch: If you haven't already, convert your array method callbacks into arrow functions - make sure you comment out this section before you submit your work 🦁💪
+
+console.log("Array Methods");
  
+const Add = (num1,num2) => num1 + num2;
+const Multiply = (num1,num2) => num1*num2;
+const Greeting = (firstname,lastname) => `Hello ${firstname} ${lastname}, nice to meet you!`;
 
-
+console.log(consume(2, 2, Add)); // 4
+console.log(consume(10, 16, Multiply)); // 160
+console.log(consume("Mary", "Poppins", Greeting)); // Hello Mary Poppins, nice to meet you!
 
 
 // 🐴🐴🐴 Topic 3: Prototypes 🐴🐴🐴 //
-//🐴🐴🐴 Task: You are to build a cuboid maker that can return values for a cuboid's volume or surface area. Cuboids are similar to cubes but do not have even sides. Follow the steps in order to accomplish this challenge. 🐴🐴🐴
+//🐴🐴🐴 Task: You are to build a cuboid maker that can return values for a cuboid's volume or surface area. 
+// Cuboids are similar to cubes but do not have even sides. Follow the steps in order to accomplish this challenge. 🐴🐴🐴
+
 /* 🐴🐴🐴 Step 1: Base Constructor 🐴🐴🐴
  Use the constructor function named CuboidMaker to accept properties for length, width, and height which can be initialized as an object
 */
